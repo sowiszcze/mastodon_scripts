@@ -25,7 +25,7 @@ fi
 
 DIRECTORY=$1
 
-if ! cd "$DIRECTORY"; then
+if ! cd "$DIRECTORY/app"; then
   echoerr "Could not enter directory $DIRECTORY"
   exit 4
 fi
