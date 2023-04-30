@@ -7,9 +7,9 @@ if [[ "$#" -ne 2 ]]; then
     echoerr "Incorrect usage of the script."
   fi
   cat << EOF
-usage: $0 mastodon_dir desired_length
+usage: $0 app_directory desired_length
 
-mastodon_dir - directory, where your Mastodon instance is located
+app_directory - app directory under the Mastodon root
 desired_length - desired max length of a toot, has to be an integer greater than 0
 EOF
   if [[ ${1} != "-h" ]] && [[ ${1} != "help" ]]; then
@@ -25,19 +25,19 @@ fi
 
 DIRECTORY=$1
 
-if ! cd "$DIRECTORY/app"; then
+if ! cd "$DIRECTORY"; then
   echoerr "Could not enter directory $DIRECTORY"
   exit 4
 fi
 
 if [[ ! -f "javascript/mastodon/features/compose/components/compose_form.js" ]]; then
-  echoerr "Are you sure that $DIRECTORY is a correct Mastodon directory? I can't find compose_form.js file where it's supposed to be."
+  echoerr "Are you sure that $DIRECTORY is a correct Mastodon's app directory? I can't find compose_form.js file where it's supposed to be."
   exit 5
 elif [[ ! -f "validators/status_length_validator.rb" ]]; then
-  echoerr "Are you sure that $DIRECTORY is a correct Mastodon directory? I can't find status_length_validator.rb file where it's supposed to be."
+  echoerr "Are you sure that $DIRECTORY is a correct Mastodon's app directory? I can't find status_length_validator.rb file where it's supposed to be."
   exit 6
 elif [[ ! -f "serializers/rest/instance_serializer.rb" ]]; then
-  echoerr "Are you sure that $DIRECTORY is a correct Mastodon directory? I can't find instance_serializer.rb file where it's supposed to be."
+  echoerr "Are you sure that $DIRECTORY is a correct Mastodon's app directory? I can't find instance_serializer.rb file where it's supposed to be."
   exit 7
 fi
 
